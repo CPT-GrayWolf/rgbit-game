@@ -128,7 +128,7 @@ width:100%;
 #instructions
 {
     position:relative;
-    padding:20%;
+    padding:20% 20% 0% 20%;
     text-align:center;
     font-size:120%;
     clear:both;
