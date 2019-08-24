@@ -1,0 +1,167 @@
+/*
+ *  RGBit Mix CSS content.
+ *
+ *  Copyright (C) 2019 T. Ian "Luna" Ericson.
+ *  <writerthewolf@gmail.com>
+ *  
+ *  This program is free software, licensed under
+ *  the terms of the GNU Public License version 2+
+ *  as published by the Free Software Foundation.
+ *  All rights not specifically granted herein are
+ *  hereby granted freely to the user by the 
+ *  creator of this software.
+ *  
+ *  This software is distributed in the hope that
+ *  it will be useful or entertaining, but WITHOUT
+ *  ANY WARRANTY, implied or otherwise, as 
+ *  described under the GPL2+.
+ *
+ *  You should have received a copy of the GNU
+ *  Public License along with this software. If not,
+ *  the license is available at:
+ *  <http://www.gnu.org/licenses/>.
+ */
+ 
+/*  
+ *  Do a quick reset of some important elements and
+ *  set up the body tag.
+ */
+html, div, span, img, h1, h2, p
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+body
+{
+    background-color:#111;
+    text-shadow:1px 1px 4px #050505;
+    font-family:Arial, Helvetica, sans-sarif;
+    font-size:90%;
+    color:#aaa;
+    min-width:348px;
+    max-width:1000px;
+    margin:0 auto;
+    padding:2% 10% 0% 10%;
+}
+
+/*
+ *  Set up the game button classes.
+ */
+.gameObject
+{
+    float:left;
+    box-shadow:2px 2px 5px #000;
+    border-radius:25%;
+    margin-right:10px;
+    width:120px;
+    height:120px;
+}
+.gameObject img
+{
+width:100%;
+}
+.gameObject:hover
+{
+    box-shadow:inset 0px 0px 2px #000,3px 3px 3px #000;
+}
+
+/*
+ *  Classes for colored text.
+ */
+.color-r
+{
+    color:#f00;
+}
+.color-g
+{
+    color:#0f0;
+}
+.color-b
+{
+    color:#00f;
+}
+.color-m
+{
+    color:#f0f;
+}
+.color-c
+{
+    color:#0ff;
+}
+.color-y
+{
+    color:#ff0;
+}
+.color-w
+{
+    color:#fff;
+}
+
+/*
+ *  Setup the different page elements.
+ */
+#headerBlank
+{
+    font-size:400%;
+    text-align:center;
+    padding-bottom:5%;
+}
+#moves
+{
+    font-size:150%;
+    font-weight:bold;
+    float:right;
+}
+#score
+{
+    font-size:150%;
+    font-weight:bold;
+    float:right;
+}
+#core
+{
+    width:auto;
+    margin:0 auto;
+}
+#instructions
+{
+    position:relative;
+    padding:20%;
+    text-align:center;
+    font-size:120%;
+    clear:both;
+}
+
+/*
+ *  Set up the colors for each button object.
+ */
+#item-b
+{
+    background-color:#00f;
+}
+#item-g
+{
+    background-color:#0f0;
+}
+#item-c
+{
+    background-color:#0ff;
+}
+#item-r
+{
+    background-color:#f00;
+}
+#item-m
+{
+    background-color:#f0f;
+}
+#item-y
+{
+    background-color:#ff0;
+}
+#item-w
+{
+    background-color:#fff;
+}
