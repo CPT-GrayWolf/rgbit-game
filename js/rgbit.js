@@ -39,6 +39,7 @@ var lastID = -1;
 
 //  Hide the game and run the setup.
 document.getElementById("core").style.display = "none";
+document.getElementById("setup").style.display = "block";
 document.getElementById("gameStart").onclick = function() 
 {   
     startingMoves = document.getElementById("maxMoves").value;
