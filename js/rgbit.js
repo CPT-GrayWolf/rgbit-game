@@ -85,6 +85,9 @@ function setupGameBoard()
     if(startFour == false)
     {
         document.getElementById(itemID[6]).style.display = "none";
+    } else
+    {
+        document.getElementById(itemID[6]).style.display = "initial";
     }
     
     document.getElementById("moves").innerHTML = "Moves: " + moveCount;
