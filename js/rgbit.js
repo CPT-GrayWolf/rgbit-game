@@ -24,14 +24,15 @@
 
 //  Set setup page defaults.
 document.getElementById("maxMoves").value = 15;
-document.getElementById("staringColors").value = 3;
+document.getElementById("staringColors").value = 0;
 
 //  Create and initialize important variables.
+const itemID = ["item-b", "item-g", "item-c", "item-r", "item-m", "item-y", "item-w"];
 var itemColor = [0, 0, 0, 0, 0, 0, 0];
-var itemID = ["item-b", "item-g", "item-c", "item-r", "item-m", "item-y", "item-w"];
 var startingMoves = 15;
 var startMode = 0;
 var startFour = false;
+var startRGB = true;
 var moveCount = 15;
 var scoreCount = 0;
 var lastID = -1;
@@ -43,16 +44,22 @@ document.getElementById("gameStart").onclick = function()
     startingMoves = document.getElementById("maxMoves").value;
     startMode = document.getElementById("gameMode").value;
     
-    if(document.getElementById("staringColors").value == 4)
-    {   
+    if(document.getElementById("staringColors").value == 1)
+    {
+        startRGB = true;
+        startFour = true;
+    } else if(document.getElementById("staringColors").value == 2)
+    {
+        startRGB = false;
         startFour = true;
     } else
     {
-        startFour =false;
+        startRGB = true;
+        startFour = false;
     }
     
     document.getElementById("setup").style.display = "none";
-    document.getElementById("core").style.display = "initial";
+    document.getElementById("core").style.display = "block";
     setupGameBoard();
 }
 
@@ -65,6 +72,13 @@ document.getElementById(itemID[4]).onclick = function() {doItemCheck(5);}
 document.getElementById(itemID[5]).onclick = function() {doItemCheck(6);}
 document.getElementById(itemID[6]).onclick = function() {doItemCheck(7);}
 
+//  Enable options button.
+document.getElementById("buttonOptions").onclick = function() 
+{
+    document.getElementById("core").style.display = "none";
+    document.getElementById("setup").style.display = "block";
+}
+
 //  Enable the reset button
 document.getElementById("resetBoard").onclick = function() {setupGameBoard();}
 
@@ -74,20 +88,35 @@ function setupGameBoard()
     moveCount = startingMoves;
     scoreCount = 0;
     itemColor = [0, 0, 0, 0, 0, 0, 0];
+    lastID = -1;
     
-    document.getElementById(itemID[0]).style.display = "initial";
-    document.getElementById(itemID[1]).style.display = "initial";
-    document.getElementById(itemID[3]).style.display = "initial";
-    
-    document.getElementById(itemID[2]).style.display = "none";
-    document.getElementById(itemID[4]).style.display = "none";
-    document.getElementById(itemID[5]).style.display = "none";
-    if(startFour == false)
+    if(startRGB == true && startFour == false)
     {
+        document.getElementById(itemID[0]).style.display = "initial";
+        document.getElementById(itemID[1]).style.display = "initial";
+        document.getElementById(itemID[3]).style.display = "initial";
+        document.getElementById(itemID[2]).style.display = "none";
+        document.getElementById(itemID[4]).style.display = "none";
+        document.getElementById(itemID[5]).style.display = "none";
         document.getElementById(itemID[6]).style.display = "none";
+    } else if(startRGB == true && startFour == true)
+    {
+        document.getElementById(itemID[0]).style.display = "initial";
+        document.getElementById(itemID[1]).style.display = "initial";
+        document.getElementById(itemID[3]).style.display = "initial";
+        document.getElementById(itemID[6]).style.display = "initial";
+        document.getElementById(itemID[2]).style.display = "none";
+        document.getElementById(itemID[4]).style.display = "none";
+        document.getElementById(itemID[5]).style.display = "none";
     } else
     {
+        document.getElementById(itemID[2]).style.display = "initial";
+        document.getElementById(itemID[4]).style.display = "initial";
+        document.getElementById(itemID[5]).style.display = "initial";
         document.getElementById(itemID[6]).style.display = "initial";
+        document.getElementById(itemID[0]).style.display = "none";
+        document.getElementById(itemID[1]).style.display = "none";
+        document.getElementById(itemID[3]).style.display = "none";
     }
     
     document.getElementById("moves").innerHTML = "Moves: " + moveCount;
