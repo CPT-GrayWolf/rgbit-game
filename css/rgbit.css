@@ -104,6 +104,7 @@ width:100%;
  */
 #setup 
 {
+    display:none;
     text-align:center;
     position:relative;
     font-size:200%;
@@ -112,6 +113,7 @@ width:100%;
 }
 #core
 {
+    display:none;
     width:auto;
     margin:0 auto;
 }
