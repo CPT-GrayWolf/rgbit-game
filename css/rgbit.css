@@ -102,6 +102,20 @@ width:100%;
 /*
  *  Setup the different page elements.
  */
+#setup 
+{
+    text-align:center;
+    position:relative;
+    font-size:200%;
+    width:100%;
+    margin-top:10%;
+    padding:0 auto;
+}
+#core
+{
+    width:auto;
+    margin:0 auto;
+}
 #headerBlank
 {
     font-size:400%;
@@ -120,10 +134,9 @@ width:100%;
     font-weight:bold;
     float:right;
 }
-#core
+#resetBoard
 {
-    width:auto;
-    margin:0 auto;
+    float:right;
 }
 #instructions
 {

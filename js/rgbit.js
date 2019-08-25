@@ -22,21 +22,39 @@
  *  <http://www.gnu.org/licenses/>.
  */
 
+//  Set setup page defaults.
+document.getElementById("maxMoves").value = 15;
+document.getElementById("staringColors").value = 3;
+
 //  Create and initialize important variables.
 var itemColor = [0, 0, 0, 0, 0, 0, 0];
 var itemID = ["item-b", "item-g", "item-c", "item-r", "item-m", "item-y", "item-w"];
+var startingMoves = 15;
+var startMode = 0;
+var startFour = false;
 var moveCount = 15;
 var scoreCount = 0;
 var lastID = -1;
 
-//  Set up game board.
-document.getElementById(itemID[2]).style.display = "none";
-document.getElementById(itemID[4]).style.display = "none";
-document.getElementById(itemID[5]).style.display = "none";
-document.getElementById(itemID[6]).style.display = "none";
-
-//  Set the "Moves" counter.
-document.getElementById("moves").innerHTML = "Moves: " + moveCount;
+//  Hide the game and run the setup.
+document.getElementById("core").style.display = "none";
+document.getElementById("gameStart").onclick = function() 
+{   
+    startingMoves = document.getElementById("maxMoves").value;
+    startMode = document.getElementById("gameMode").value;
+    
+    if(document.getElementById("staringColors").value == 4)
+    {   
+        startFour = true;
+    } else
+    {
+        startFour =false;
+    }
+    
+    document.getElementById("setup").style.display = "none";
+    document.getElementById("core").style.display = "initial";
+    setupGameBoard();
+}
 
 //  Grab when a button gets pressed and react.
 document.getElementById(itemID[0]).onclick = function() {doItemCheck(1);}
@@ -46,6 +64,32 @@ document.getElementById(itemID[3]).onclick = function() {doItemCheck(4);}
 document.getElementById(itemID[4]).onclick = function() {doItemCheck(5);}
 document.getElementById(itemID[5]).onclick = function() {doItemCheck(6);}
 document.getElementById(itemID[6]).onclick = function() {doItemCheck(7);}
+
+//  Enable the reset button
+document.getElementById("resetBoard").onclick = function() {setupGameBoard();}
+
+//  Set up game board.
+function setupGameBoard()
+{   
+    moveCount = startingMoves;
+    scoreCount = 0;
+    itemColor = [0, 0, 0, 0, 0, 0, 0];
+    
+    document.getElementById(itemID[0]).style.display = "initial";
+    document.getElementById(itemID[1]).style.display = "initial";
+    document.getElementById(itemID[3]).style.display = "initial";
+    
+    document.getElementById(itemID[2]).style.display = "none";
+    document.getElementById(itemID[4]).style.display = "none";
+    document.getElementById(itemID[5]).style.display = "none";
+    if(startFour == false)
+    {
+        document.getElementById(itemID[6]).style.display = "none";
+    }
+    
+    document.getElementById("moves").innerHTML = "Moves: " + moveCount;
+    document.getElementById("score").innerHTML = "Score: " + scoreCount;
+}
 
 /*
  *  Remove pressed button based on its ID and add 
