@@ -37,7 +37,8 @@
    <div id="setup">
         <p>Game Mode:<br>
             <select id="gameMode">
-                <option value="1">Standard</option>
+                <option value="0">Standard</option>
+                <option value="1">Timed</option>
             </select>
         </p>
         <br>
@@ -49,9 +50,9 @@
             </select>
         </p>
         <br>
-        <p>Moves:<br><input type="number" id="maxMoves" min="10" max="25"></p>
+        <p><span id="counterSetup">Moves:</span><br><input type="number" id="maxCounter" min="10" max="25"></p>
         <br><br>
-        <button id="gameStart">Start</button>
+        <button id="gameStart">Play</button>
     </div>
     
     <div id="core">
@@ -67,8 +68,8 @@
     <p id="item-w" class="gameObject"><img src=""></p>
     <p id="moves" class="color-w"></p><br><br>
     <p id="score" class="color-w"></p><br><br>
-    <button id="buttonOptions">Options</button><br><br>
-    <button id="resetBoard">Reset</button>
+    <button id="resetBoard">New Game</button><br><br>
+    <button id="buttonOptions">Options</button>
     <p id="instructions">
         Colors correspond to their binary representations in RGB order. Each color up the scale is worth twice that of the last, with blue being worth the least at 2 points. Colors are mixed with the last color you picked via bitwise XOR.
         <br>
