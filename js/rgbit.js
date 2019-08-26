@@ -23,27 +23,55 @@
  */
 
 //  Set setup page defaults.
-document.getElementById("maxMoves").value = 15;
+document.getElementById("maxCounter").value = 15;
 document.getElementById("staringColors").value = 0;
+document.getElementById("gameMode").value = 0;
 
 //  Create and initialize important variables.
 const itemID = ["item-b", "item-g", "item-c", "item-r", "item-m", "item-y", "item-w"];
 var itemColor = [0, 0, 0, 0, 0, 0, 0];
-var startingMoves = 15;
+var counterText = "Moves:"
+var startingText = "Moves:"
+var startingCount = 15;
 var startMode = 0;
 var startFour = false;
 var startRGB = true;
-var moveCount = 15;
+var currentMode = 0;
+var gamePaused = true;
+var inGame = false;
+var gameCount = 0;
 var scoreCount = 0;
+var scored = false;
 var lastID = -1;
 
 //  Hide the game and run the setup.
 document.getElementById("core").style.display = "none";
 document.getElementById("setup").style.display = "block";
+//  Set the Game Mode.
+document.getElementById("gameMode").onchange = function()
+{
+    startMode = document.getElementById("gameMode").value;
+    
+    if(startMode == 0)
+    {
+        startingText = "Moves:"
+        document.getElementById("maxCounter").min = 10;
+        document.getElementById("maxCounter").max = 25;
+        document.getElementById("maxCounter").value = 15;
+    } else if(startMode == 1)
+    {
+        startingText = "Time:"
+        document.getElementById("maxCounter").min = 15;
+        document.getElementById("maxCounter").max = 60;
+        document.getElementById("maxCounter").value = 20;
+    }
+    
+    document.getElementById("counterSetup").innerHTML = startingText;
+}
+//  Set options for the next game.
 document.getElementById("gameStart").onclick = function() 
 {   
-    startingMoves = document.getElementById("maxMoves").value;
-    startMode = document.getElementById("gameMode").value;
+    startingCount = document.getElementById("maxCounter").value;
     
     if(document.getElementById("staringColors").value == 1)
     {
@@ -61,7 +89,13 @@ document.getElementById("gameStart").onclick = function()
     
     document.getElementById("setup").style.display = "none";
     document.getElementById("core").style.display = "block";
-    setupGameBoard();
+    
+    if(inGame == false)
+    {
+        setupGameBoard();
+    }
+    
+    gamePaused = false;
 }
 
 //  Grab when a button gets pressed and react.
@@ -73,9 +107,13 @@ document.getElementById(itemID[4]).onclick = function() {doItemCheck(5);}
 document.getElementById(itemID[5]).onclick = function() {doItemCheck(6);}
 document.getElementById(itemID[6]).onclick = function() {doItemCheck(7);}
 
+//  Run the timed mode check once a second.
+setInterval(timedMode, 1000);
+
 //  Enable options button.
 document.getElementById("buttonOptions").onclick = function() 
 {
+    gamePaused = true;
     document.getElementById("core").style.display = "none";
     document.getElementById("setup").style.display = "block";
 }
@@ -86,10 +124,13 @@ document.getElementById("resetBoard").onclick = function() {setupGameBoard();}
 //  Set up game board.
 function setupGameBoard()
 {   
-    moveCount = startingMoves;
+    counterText = startingText;
+    currentMode = startMode;
+    gameCount = startingCount;
     scoreCount = 0;
     itemColor = [0, 0, 0, 0, 0, 0, 0];
     lastID = -1;
+    scored = false;
     
     if(startRGB == true && startFour == false)
     {
@@ -120,8 +161,28 @@ function setupGameBoard()
         document.getElementById(itemID[3]).style.display = "none";
     }
     
-    document.getElementById("moves").innerHTML = "Moves: " + moveCount;
+    document.getElementById("counter").innerHTML = counterText + " " + gameCount;
     document.getElementById("score").innerHTML = "Score: " + scoreCount;
+    inGame = true;
+}
+
+//  Runs every second in timed mode.
+function timedMode()
+{
+    if(currentMode == 0 || gamePaused == true) {return};
+    
+    if(gameCount >= 1)
+    {
+        gameCount--;
+        document.getElementById("counter").innerHTML = counterText + " " + gameCount;
+    } else if(scored == false)
+    {
+        gameCount--;
+        getScore();
+    } else
+    {
+        return;
+    }
 }
 
 /*
@@ -136,7 +197,10 @@ function doItemCheck(ID)
         document.getElementById(itemID[ID-1]).style.display = "none";
         
         itemColor[ID-1]++;
-        moveCount--;
+        if(currentMode == 0)
+        {
+            gameCount--;
+        }
         
         if(lastID >= 0)
         {
@@ -159,11 +223,12 @@ function getScore()
     scoreCount += (itemColor[i] * Math.pow(2, (i + 1)));
     }
     
-    document.getElementById("moves").innerHTML = "Moves: " + moveCount;
+    document.getElementById("counter").innerHTML = counterText + " " + gameCount;
     document.getElementById("score").innerHTML = "Score: " + scoreCount;
     
-    if(moveCount == 0)
+    if(gameCount == 0 && scored == false)
     {
+        scored = true;
         alert("Score: " + scoreCount);
     }
 }
