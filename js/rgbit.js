@@ -171,7 +171,7 @@ function timedMode()
 {
     if(currentMode == 0 || gamePaused == true) {return};
     
-    if(gameCount >= 1)
+    if(gameCount > 1)
     {
         gameCount--;
         document.getElementById("counter").innerHTML = counterText + " " + gameCount;
